@@ -1,0 +1,31 @@
+.Menu{
+    width:180px;
+    height:100vh;
+    float: left;
+    box-sizing: border-box;
+    border-right:5px solid $light-red;
+    .category{
+        border-radius: 15px;
+        width:100px;
+        height:100px;
+        margin:15px auto;
+        border:2px solid $light-yellow;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        cursor: pointer;
+        transition: .5s;
+    }
+    .active{
+        transform: scale(1.1);
+    }
+    img{
+        width:100%;
+    }
+    h3{
+        user-select: none;
+        font-size:16px;
+        width:100%;
+        text-align: center;
+    }
+}
