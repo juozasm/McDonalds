@@ -58,7 +58,8 @@ const server = app.listen(port, () => {
   console.log(chalk.bgGreen(`server is running on port ${port}`));
 });
 
-const io = require('socket.io')(server);
+const secureServer=https.createServer(options, app).listen(9443);
+const io = require('socket.io')(secureServer);
 io.on('connection', (socket) => {
   console.log('new user has connected');
   socket.on('test', (data) => {
@@ -68,6 +69,5 @@ io.on('connection', (socket) => {
     }
   })
 });
-https.createServer(options, app).listen(9443);
 app.set('socketio', io);
 app.use(require('helmet')());
