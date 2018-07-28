@@ -51,7 +51,7 @@ const server = app.listen(port, () => {
   console.log(chalk.bgGreen(`server is running on port ${port}`));
 });
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(430);
 io.on('connection', (socket) => {
   console.log('new user has connected');
   socket.on('test', (data) => {
