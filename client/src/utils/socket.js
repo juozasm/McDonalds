@@ -1,2 +1,2 @@
 import io from 'socket.io-client';
-export default io('https://thecat.lt:9000');
+export default io('http://662669.s.dedikuoti.lt:9000');
