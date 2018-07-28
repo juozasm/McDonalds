@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const chalk = require('chalk');
@@ -46,12 +48,17 @@ if(process.env.NODE_ENV==='production'){
 }
 
 const port = process.env.PORT;
+const options = {
+  cert: fs.readFileSync('/etc/letsencrypt/live/thecat.lt/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/thecat.lt/privkey.pem')
+};
 
-const server = app.listen(port, () => {
-  console.log(chalk.bgGreen(`server is running on port ${port}`));
+
+const server = app.listen(8000, () => {
+  console.log(chalk.bgGreen(`server is running on port ${8000}`));
 });
 
-const io = require('socket.io')(430);
+const io = require('socket.io')(server);
 io.on('connection', (socket) => {
   console.log('new user has connected');
   socket.on('test', (data) => {
@@ -61,5 +68,6 @@ io.on('connection', (socket) => {
     }
   })
 });
-
+https.createServer(options, app).listen(port);
 app.set('socketio', io);
+app.use(require('helmet')());
